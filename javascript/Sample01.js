@@ -11,8 +11,8 @@ form.addEventListener("submit",function (event){
     console.log(input.value);
     // defaultのイベントを無効にする。⇒reloadを停止
     event.preventDefault();
-    
-    if(input.value.length > 0){
+    // 条件：文字入力があった場合にリストに追加する⇒型変換されるので簡略に記載できる
+    if(input.value){
         add();
     }
 
@@ -21,8 +21,9 @@ form.addEventListener("submit",function (event){
 
 // Listに追加
 function add(){
+    let todoText = input.value;
     const li = document.createElement("li")
-    li.innerText = input.value;
+    li.innerText = todoText;
     li.classList.add("list-group-item");
     ul.appendChild(li);
     input.value = "";
