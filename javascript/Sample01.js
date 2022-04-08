@@ -29,11 +29,15 @@ form.addEventListener("submit",function (event){
 function add(todo){
     let todoText = input.value;
     if(todo){
-        todoText = todo;
+        todoText = todo.text;
     }
     const li = document.createElement("li")
     li.innerText = todoText;
     li.classList.add("list-group-item");
+
+    if(todo && todo.completed){
+        li.classList.add("text-decoration-line-through");
+    }
 
     // 右クリックでItem削除機能追加
     li.addEventListener("contextmenu", function (event) {
@@ -63,7 +67,11 @@ function saveData(){
     console.log(lists);
     //localStorage.add();
     lists.forEach(value => {
-        todos.push(value.innerText)
+        let todo = {
+            text: value.innerText,
+            completed: value.classList.contains("text-decoration-line-through")
+        };
+        todos.push(todo)
     });
     console.log(todos);
     console.log(JSON.stringify(todos));
